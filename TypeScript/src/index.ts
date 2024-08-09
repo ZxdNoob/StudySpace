@@ -41,3 +41,16 @@ interface MyType {
 function getTypeInfo<T extends keyof MyType>(type: MyType, key: T) {
   return type[key];
 }
+
+// 类
+class MyClass {
+  constructor(private name: string) {}
+
+  callName() {
+    console.log('name: ', this.name);
+  }
+}
+
+const xiaoGang = new MyClass('xiaoGang');
+
+xiaoGang.callName();

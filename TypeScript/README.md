@@ -6,7 +6,7 @@
 
 ### 认识 TypeScript
 
-- 由**微软**的 Anders Hejlsberg（安德斯·海尔斯伯格）于 `2012 年`领导团队开发，于 `2014 年` 正式在 GitHub 上开源。
+- 由**微软**的 [Anders Hejlsberg（安德斯·海尔斯伯格）](https://baike.baidu.com/item/%E5%AE%89%E5%BE%B7%E6%96%AF%C2%B7%E6%B5%B7%E5%B0%94%E6%96%AF%E4%BC%AF%E6%A0%BC/2152925)于 `2012 年`领导团队开发，于 `2014 年` 正式在 GitHub 上开源。
 - JavaScript 的超集。
   ![TypeScript 与 JS 的关系](https://camo.githubusercontent.com/60467864f7e734142cb6146e19ed7ddaa2bc37d36222985a0f7cab23838c82dc/68747470733a2f2f7332312e617831782e636f6d2f323032342f30382f30382f706b7a597957392e706e67)
 - TypeScript 的特点和优势
@@ -45,6 +45,7 @@
 
 - 创建项目相关文件。
 - 运行 `tsc init` 命令可以自动生成 `tsconfig.json` 文件。
+- 在设置中找到 `TypeScript` 中 `javascript.validate.enable` 配置项，将其关闭（即设为 false）,以关闭 JavaScript 的一些验证。这样可以避免出现警告，减少干扰的同时节省系统资源。
 
 ### 关于配置文件 tsconfig.json
 

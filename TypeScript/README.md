@@ -46,6 +46,8 @@
 - 创建项目相关文件。
 - 运行 `tsc init` 命令可以自动生成 `tsconfig.json` 文件。
 - 在设置中找到 `TypeScript` 中 `javascript.validate.enable` 配置项，将其关闭（即设为 false）,以关闭 JavaScript 的一些验证。这样可以避免出现警告，减少干扰的同时节省系统资源。
+- 推荐安装 VS Code 的一个插件 —— “Reload”，在某些插件出问题时摁一下底部“Reload”按钮一般都能解决。
+  ![运行 Reload 插件](https://s21.ax1x.com/2024/08/09/pASKT3V.png)
 
 ### 关于配置文件 tsconfig.json
 

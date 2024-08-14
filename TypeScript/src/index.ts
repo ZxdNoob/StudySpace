@@ -30,7 +30,11 @@ function getName<T extends Person>(person: T) {
   return person.name;
 }
 
-const xiaoming = getName({ name: 'xiaoming', age: 13, no: 1 });
+const xiaoming = getName({
+  name: 'xiaoming',
+  age: 13,
+  no: 1,
+});
 
 // extends keyof 继承一个对象类型中的某一项
 interface MyType {
@@ -38,7 +42,10 @@ interface MyType {
   name: string;
 }
 
-function getTypeInfo<T extends keyof MyType>(type: MyType, key: T) {
+function getTypeInfo<T extends keyof MyType>(
+  type: MyType,
+  key: T
+) {
   return type[key];
 }
 
@@ -64,4 +71,4 @@ xiaoGang.callName();
   };
 };
 
-const { id } = fn(3); // 这里会报错，因为 fn 的返回值可能是一个 undefined，而 undefined 是不能被解构的 */
+const { id } = fn(3); // 这里会报错，因为 fn 的返回值可能是一个 undefined，而 undefined 是不能被解构的  是不能被解构的 是不能被解构的*/

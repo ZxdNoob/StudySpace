@@ -1,0 +1,12 @@
+{
+  "editor.formatOnSave": true,
+  "[markdown]": {
+    "editor.formatOnSave": true,
+    "editor.quickSuggestions": {
+      "other": true,
+      "comments": true,
+      "strings": true
+    },
+    "editor.defaultFormatter": "mervin.markdown-formatter"
+  }
+}

@@ -167,3 +167,107 @@ TypeScript 的类型标注是它的**一种特性**，它允许程序员为变�
 
   type Employee = Person & Animal; // Empoyee 这个类型既要有 Person 类型里的所有属性，也要有 Animal 类型里的所有属性
 ```
+
+### 联合类型（Union Type）
+
+* 概念：表示一个值可以是多种类型的一种。以“|”为标识。
+* 示例：
+
+```typescript
+  type TypeA = number | string; // TypeA 可以是 number，也可以是 string
+  type TypeB = 'A' | 'B' | 'C' | 'D'; // TypeB 可以是 A、B、C 或 D
+  ```
+
+* 特性：
+  + 可访问**共同的属性和方法**。一个类型是联合类型时，访问时联合类型中的任一类型的属性和方法都能访问。
+  如：
+
+```typescript
+  interface Bird {
+    fly(): void // 飞翔
+  }
+
+  interface Fish {
+    swim(): void // 游泳
+  }
+
+  function move (animal: Bird | Fish) {
+    if ('fly' in animal) {
+      animal.fly(); // 可以访问 Bird 的 fly 方法
+    } else {
+      animal.swim(); // 也可以访问 Fish 的 swim 方法
+    }
+  }
+  ```
+
+  + 类型缩小，即缩小类型的范围。
+    通过 `类型守卫` 可以在**运行时**确定联合类型的具体类型，从而进行更精确的类型操作。
+    例如：
+
+```typescript
+  function processValue(v: string | number) {
+    if (typeof v === 'string') {
+      v.upperCase(); // 这里的 v 被缩小为 string 类型，支持将所有字符转化成大写形式的 upperCase 方法
+    } else {
+      v * 2; // 这里的 v 被缩小为 number 类型
+    }
+  }
+    ```
+
+* 实际应用场景
+  + 函数参数类型。当函数的参数需要支持不同的参数类型时，可以使用联合类型来定义参数类型。
+
+```typescript
+  function getValue(v: string | number | boolean) { // 参数类型可以是 string、number 或 boolean
+    console.log(v);
+  }
+```
+
+  + 接口的扩展。使用联合类型来扩展接口，让接口接受不同类型的实现。
+
+```typescript
+  interface Shape {
+    area(): number
+  }
+
+  interface Circle {
+    radios: number
+  }
+
+  interface Rectangle {
+    width: number
+    height: number
+  }
+
+  type MyShape = Shape | Circle | Rectangle; // MyType 支持 Shape、Circle 和 Retangle 三种类型
+
+  function calculateArea(shape: MyShape): number { // 计算一个图形的面积
+    let result = 0;
+
+    if ('radios' in shape) {
+      result = Math.PI * shape.radios * shape.radios;
+    } else if ('width' in shape && 'height' in shape) {
+      result = shape.width * shape.height;
+    } else {
+      result = shape.area();
+    }
+
+    return result;
+  }
+```
+
+* 作用：联合类型为 TypeScript 提供了更大的**灵活性**，使你可以处理多种不同类型的值，同时保持**类型安全**。
+
+### 条件类型（Conditionnal Type）
+
+* 概念：它是一种`高级类型系统特性`，它允许根据条件表达式（**extends** 配合**三目运算**）来选择不同类型，或者说它根据条件来确定类型。
+* 基本语法：`T extends U ？X ：Y`。这段代码意思是如果类型 T 可以分配给类型 U，则结果类型为 X，否则结果类型为 Y。
+
+例如：
+
+```TypeScript
+    type IsString<T> = T extends string ? true : false;
+
+    type A = IsString<string>; // A 类型为 true
+    type B = IsString<number>; // B 类型为 false
+  ```

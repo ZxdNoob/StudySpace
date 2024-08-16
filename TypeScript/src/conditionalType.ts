@@ -65,3 +65,9 @@ function createLabel(
 
 const label3 = createLabel(666); // 被推断为 IdLabel 类型
 const label4 = createLabel('Go go go'); // 被推断为 NameLabel 类型
+
+// 条件类型的其他场景
+
+type TypeOfMessage<T> = T extends { message: unknown } ? T['message'] : never;
+
+type TestType<T extends { message: unknown }> = T['message']

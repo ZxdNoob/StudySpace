@@ -1,4 +1,6 @@
 // 条件类型：根据条件来确定类型。
+// 形式：T extends U ? X : Y，有点像三目运算，关键字是 extends
+// Tips: 需要注意的是 T 可以看成是 U 的子类型，不要求
 
 interface A {
   name: string;
@@ -66,8 +68,16 @@ function createLabel(
 const label3 = createLabel(666); // 被推断为 IdLabel 类型
 const label4 = createLabel('Go go go'); // 被推断为 NameLabel 类型
 
-// 条件类型的其他场景
+// 条件类型的其他场景，可以帮助我们避免重复定义类型
 
-type TypeOfMessage<T> = T extends { message: unknown } ? T['message'] : never;
+interface Email {
+  to: string;
+  from: string;
+  message: string;
+}
 
-type TestType<T extends { message: unknown }> = T['message']
+type TypeOfMessage<T> = T extends { message: unknown }
+  ? T['message']
+  : never;
+
+const email: TypeOfMessage<Email> = 'xxx@xx.com'; // 传入 Email 后，email 最终被断言为 string 类型

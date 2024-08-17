@@ -68,7 +68,7 @@ function createLabel(
 const label3 = createLabel(666); // 被推断为 IdLabel 类型
 const label4 = createLabel('Go go go'); // 被推断为 NameLabel 类型
 
-// 条件类型的其他场景，可以帮助我们避免重复定义类型
+// 条件类型的一个应用场景例子，可以帮助我们避免重复定义类型
 
 interface Email {
   to: string;
@@ -81,3 +81,35 @@ type TypeOfMessage<T> = T extends { message: unknown }
   : never;
 
 const email: TypeOfMessage<Email> = 'xxx@xx.com'; // 传入 Email 后，email 最终被断言为 string 类型
+
+// 配合 infer 关键字的例子。infer 是工具类型和底层库中非常常用的关键字，表示在 extends 条件语句（即配合条件类型使用）中待推断的类型变量（一般用在函数类型中返回值类型身上）
+type GetReturnType<T> = T extends (
+  ...args: never[]
+) => infer ReturnType
+  ? ReturnType
+  : never;
+
+type AString = GetReturnType<() => string>;
+type ANever = GetReturnType<number>;
+
+// 条件类型其他例子
+type ToArrayType<T> = T extends any ? T[] : never;
+type ToArrayType2<T> = [T] extends [any] ? T[] : never;
+
+type StringOrNumberArray = ToArrayType<string | number>; // 这里 StringOrNumberArray 被推断成了 string[] | number[]
+type StringOrNumberArray2 = ToArrayType2<string | number>; // 这里 StringOrNumberArray2 被推断成了 (string | number)[]
+
+// string[] | number[] 与 (string | number)[] 的区别，前者要求要么是纯字符串数组要么是纯数字数组，后者意为数组元素可以是数字也可以是字符串的数组
+type StringArrOrNumberArrType = string[] | number[];
+type StringOrNumberArrType = (string | number)[];
+
+const stringOrNumberArr: StringArrOrNumberArrType = [
+  1, 2, 3,
+];
+
+const stringOrNumberArr2: StringOrNumberArrType = [
+  1,
+  'one',
+  'two',
+  3,
+];

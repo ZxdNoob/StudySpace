@@ -85,8 +85,8 @@ const email: TypeOfMessage<Email> = 'xxx@xx.com'; // 传入 Email 后，email �
 // 配合 infer 关键字的例子。infer 是工具类型和底层库中非常常用的关键字，表示在 extends 条件语句（即配合条件类型使用）中待推断的类型变量（一般用在函数类型中返回值类型身上）
 type GetReturnType<T> = T extends (
   ...args: never[]
-) => infer ReturnType
-  ? ReturnType
+) => infer R
+  ? R
   : never;
 
 type AString = GetReturnType<() => string>;
@@ -113,3 +113,11 @@ const stringOrNumberArr2: StringOrNumberArrType = [
   'two',
   3,
 ];
+
+// ReturnType，语法：ReturnType<T>，其中 T 是一个函数类型
+function add(a: number, b: number) {
+  return a + b;
+}
+
+type ANumber = ReturnType<typeof add>; // typeof 用于推断 add 的类型，add 类型为 (a: number, b: number) => number
+type AString2 = ReturnType<() => string>; // 给 ReturnType 直接传一个返回值是一个 string 的函数类型

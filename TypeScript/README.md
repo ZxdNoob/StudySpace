@@ -1,3 +1,5 @@
+[TOC]
+
 ## 简介
 
 这是一个用来学习 `TypeScript` 的项目。
@@ -129,13 +131,53 @@
 
 ### 类型标注（或称之为“类型注解”，Type annotation）
 
-TypeScript 的类型标注是它的**一种特性**，它允许程序员为变量、函数参数、返回值等**指定预期的数据类型**。这样做的目的：
+TypeScript 的类型标注是它的**一种特性**，它允许程序员为变量、函数参数、返回值等**指定预期的数据类型**。简而言之就是声明类型的方式。这样做的目的：
 
 * **声明类型**：通过在变量声明前添加冒号和对应的数据类型，如 `let myNumber: number = 6;`，告诉编译器这个变量应该存储数值。
 * **类型推断**：虽然不是强制的，但在许多情况下 TypeScript 可以自动推断类型（涉及到**类型断言**的概念），当你初始化一个变量时，类型系统可以**根据赋值自动确定类型**。
 * **强类型检查**： 类型标注使得编译器可以在编译阶段检测出**潜在的类型错误**，比如试图将字符串赋给期望是数字的变量，这种错误在运行时不会发生，提高了**代码质量和稳定性**。
 * **接口和类的类型**： 对于对象和复杂类型，可以使用接口（**interface**）和类（**class**）来描述它们的结构和期望的行为，使得类型更为清晰。
 * **泛型（Generics）**： TypeScript 提供了泛型（下面有介绍）功能，允许编写高度**模块化的函数或类**，其中的类型参数**可以在任何地方使用**。
+
+#### 表达式
+
+* 注解（Annotation）
+  + name: type = value; // 有赋值
+
+```typescript
+  const str: string = 'Hello, TypeScript!';
+```
+
+  + name: type; // 没赋值
+
+```typescript
+  let a: any;
+```
+
+* 断言（Assertion）：
+  + expression as type
+
+```typescript
+  const z = (y + x) as string;
+```
+
+  + value as type
+
+```typescript
+  const aAny: any = 'This is a string';
+  const len = (aAny as string).length;
+```
+
+`有名字的` 地方一定可以使用**注解**， `有表达式的` 地方一定可以使用**断言**。
+
+#### Tips
+
+一个常量或变量声明的字面量如果**不显式注解类型**，就会是一个**字面量类型**。
+
+```typescript
+  const k = 1; // k 被推断为字面量类型 1
+  const s = 's'; // s 被推断为字面量类型字符串 s
+```
 
 ### 关于泛型（Generics）
 
